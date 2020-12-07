@@ -253,7 +253,7 @@ where
 	/// Evict this contract.
 	fn evict(&mut self) -> Result<(), &'static str> {
 		self.set_block_num_for_eviction()?;
-		Rent::<T>::collect(&self.contract.account_id);
+		Rent::<T>::snitch_contract_should_be_evicted(&self.contract.account_id, 0.into());
 		self.contract.ensure_tombstone()
 	}
 }
